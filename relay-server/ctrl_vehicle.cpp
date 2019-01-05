@@ -107,12 +107,14 @@ void control::vehicle::halt()
     if (vhcl == NULL)
         return;
     h2ep::Event ev ("steer");
+    ptree pins;
     for (auto& i: PINS)
     {
         ptree pin;
         pin.put("pin",i);
         pin.put("value",0);
-        ev.data.push_back(make_pair("",pin));
+        pins.push_back(make_pair("",pin));
     }
+    ev.data.add_child("pins",pins);
     vhcl->endpoint->send(ev);
 }

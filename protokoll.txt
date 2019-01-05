@@ -24,7 +24,7 @@ Verbindung mit Externem Client:
 		captain_pass:"true"|"false"
 		}
 	
-	-> "steer" { {pin:[pinnr], value:[value]} [] }
+	-> "steer" { pins: {pin:[pinnr], value:[value]} [] }
 	<- "steer" {result:"ok"|"error", msg:[nachricht]}
 	
 	-> "adminlogin" {pass:[passwort]}
@@ -61,7 +61,7 @@ Verbindung mit Relay-Server:
 	<- "mobil" {pass:[passwort]}
 	-> "mobil" {result:"ok"|"error", msg:[nachricht]}
 	
-	-> "steer" { {pin:[pinnr], value:[value]} [] }
+	-> "steer" { pins: {pin:[pinnr], value:[value]} [] }
 	<- "steer" {result:"ok"|"error", msg:[nachricht]}
 	
 	-> "video" {state:"true"|"false"}
