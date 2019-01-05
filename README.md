@@ -2,8 +2,8 @@
 Das Projekt besteht aus 3 Komponenten, welche zusammen ein Fernsteuerbares Gerät mit Webcam steuert. Basiert auf tobilib
 
 ## Prinzip
-Zuschauer: optional Passwortgeschützt, können Video erhalten
-Captain: optional Passwortgeschützt, steuert das Fahrzeug
+Zuschauer: optional Passwortgeschützt, können Video erhalten<br>
+Captain: optional Passwortgeschützt, steuert das Fahrzeug<br>
 Admins: Passwortgeschützt, verwalten Passwörter und Verbindungen
 
 ## Komponenten
