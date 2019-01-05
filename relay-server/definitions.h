@@ -153,7 +153,7 @@ namespace transmit
     void tick();
     void start();
 
-    class ConnectionData
+    struct ConnectionData
     {
         string id;
         bool viewer = false;
@@ -162,25 +162,15 @@ namespace transmit
 
     typedef stream::WS_Server<ConnectionData> Server;
     typedef Server::Connection* Client;
-    typedef vector<Client> Client_list;
     typedef Server::EndpointType::Status EPStatus;
 
-    namespace core
-    {
-        extern Server server;
-        void tick();
-        void distribute(const h2ep::Event&);
-    }
+    extern Server server;
 
-    namespace vehicle
-    {
-        Client get();
-    }
+    void identify(Client);
+    void rank(Client);
+    Client get_vehicle();
+    void distribute(const string&);
 
-    namespace viewers
-    {
-        Client_list get();
-    }
 }
 
 #endif
