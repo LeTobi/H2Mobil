@@ -1,0 +1,29 @@
+{
+    "files.associations": {
+        "vector": "cpp",
+        "*.ipp": "cpp",
+        "xiosbase": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "xstring": "cpp",
+        "array": "cpp",
+        "future": "cpp",
+        "istream": "cpp",
+        "memory": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "xlocmes": "cpp",
+        "xlocmon": "cpp",
+        "xlocnum": "cpp",
+        "xloctime": "cpp",
+        "xmemory": "cpp",
+        "thread": "cpp",
+        "xlocale": "cpp",
+        "bitset": "cpp",
+        "chrono": "cpp",
+        "xhash": "cpp",
+        "xtree": "cpp",
+        "xutility": "cpp"
+    }
+}

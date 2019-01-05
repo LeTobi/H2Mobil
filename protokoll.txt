@@ -1,0 +1,73 @@
+Verbindung mit Externem Client:
+	Client <-> (Relay | Mobil)
+	
+	Steuerung:
+	
+	<- "session" {id:[session-id]}
+	<- "info" {msg:[nachricht]}
+	
+	-> "videologin" {pass:[optional passwort]}
+	-> "videologout" {}
+	<- "videologin" {result:"ok"|"error", msg:[nachricht]}
+	<- "videologout" {result:"ok"|"error", msg:[nachricht]}
+	
+	-> "captainlogout" {}
+	<- "captainlogout" {result:"ok"|"error", msg:[nachricht]}
+	-> "captainlogin" {pass:[optional passwort]}
+	<- "captainlogin" {result:"ok"|"error", msg:[nachricht]}
+	
+	<- "state" {
+		videocount:[anzahl Zuschauer],
+		captain:"true"|"false",
+		mobile:"true"|"false",
+		video_pass:"true"|"false",
+		captain_pass:"true"|"false"
+		}
+	
+	-> "steer" { {pin:[pinnr], value:[value]} [] }
+	<- "steer" {result:"ok"|"error", msg:[nachricht]}
+	
+	-> "adminlogin" {pass:[passwort]}
+	<- "adminlogin" {result:"ok"|"error", msg:[nachricht]}
+	<- "state_admin" {
+		mobile: {occupied:"true"|"false",ip,id},
+		captain: {occupied:"true"|"false",ip,id},
+		viewers: {ip,id} []
+		}
+
+	-> "video_pass" {pass:[passwort]}
+	<- "video_pass" {result:"ok"|"error", msg:[nachricht]}
+	-> "captain_pass" {pass:[passwort]}
+	<- "captain_pass" {result:"ok"|"error", msg:[nachricht]}
+	-> "kick" {id:[id]}
+	<- "kick" {result:"ok"|"error", msg:[nachricht]}
+
+	<- "noop" {}
+	-> "noop" {}
+	
+	Kamera (rohe Websocket verbindung):
+	
+	-> 10 Zeichen mit session-id
+	-> gelegentliche keep-alives (min. 1 Zeichen)
+	<- Videostream
+	
+	
+Verbindung mit Relay-Server:
+	Relay <-> Mobil
+	
+	Steuerung:
+	-> "session" {id:[session-id]}
+	
+	<- "mobil" {pass:[passwort]}
+	-> "mobil" {result:"ok"|"error", msg:[nachricht]}
+	
+	-> "steer" { {pin:[pinnr], value:[value]} [] }
+	<- "steer" {result:"ok"|"error", msg:[nachricht]}
+	
+	-> "video" {state:"true"|"false"}
+	
+	Kamera (rohe Websocket verbindung):
+	
+	<- 10 Zeichen mit session-id
+	<- Videostream
+	-> gelegentliche keep-alives (min. 1 Zeichen)
