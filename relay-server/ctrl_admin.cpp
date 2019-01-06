@@ -50,6 +50,7 @@ void control::admins::login(Client c, const h2ep::Event& ev)
     list::add(c);
     res.data.put("result","ok");
     c->endpoint->send(res);
+    c->endpoint->send(core::statusinfo::objectify_admin());
 }
 
 void control::admins::video_pass(Client c, const h2ep::Event& ev)

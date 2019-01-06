@@ -161,6 +161,7 @@ void control::core::welcome(Server::Connection* conn)
     h2ep::Event ev ("session");
     ev.data.put("id",conn->data.id);
     conn->endpoint->send(ev);
+    conn->endpoint->send(statusinfo::objectify());
 }
 
 control::Client control::core::get_client(const string& id)
