@@ -37,10 +37,16 @@ void transmit::start()
 
 void transmit::identify(Client c)
 {
-    if (c->data.id.size()>10)
+    if (c->data.id.size()<10)
     {
         if (c->endpoint->read_size()>=10)
+        {
             c->data.id = c->endpoint->read().substr(0,10);
+        }
+    }
+    else if (c->data.viewer)
+    {
+        c->endpoint->read();
     }
 }
 
@@ -48,8 +54,6 @@ void transmit::rank(Client c)
 {
     c->data.vehicle = mutual::is_vehicle(c->data.id);
     c->data.viewer = mutual::is_viewer(c->data.id);
-    if (!c->data.vehicle)
-        c->endpoint->read();
 }
 
 transmit::Client transmit::get_vehicle()
@@ -67,6 +71,8 @@ void transmit::distribute(const string& imgdata)
     for (auto& c: server.clients())
     {
         if (c->data.viewer && !c->endpoint->write_busy())
+        {
             c->endpoint->write(imgdata);
+        }
     }
 }

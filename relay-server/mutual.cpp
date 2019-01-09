@@ -31,5 +31,7 @@ void mutual::set_vehicle(const string& id)
 bool mutual::is_vehicle(const string& id)
 {
     Guard g (lock);
+    if (vehicle.size()==0)
+        return false;
     return id==vehicle;
 }
