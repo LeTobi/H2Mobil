@@ -8,6 +8,7 @@ bool control::core::statusinfo::send = false;
 void control::tick()
 {
     core::tick();
+    vehicle::tick();
 }
 
 void control::start()

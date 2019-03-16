@@ -76,8 +76,6 @@ namespace control
 
     namespace admins
     {
-        void tick();
-
         namespace list
         {
             Client_list get();
@@ -113,6 +111,8 @@ namespace control
 
     namespace vehicle
     {
+        extern Timer pinger;
+
         namespace video
         {
             extern bool enabled;
@@ -127,6 +127,7 @@ namespace control
             void remove();
         }
         
+        void tick();
         void login(Client, const h2ep::Event&);
         void logout();
         void halt();

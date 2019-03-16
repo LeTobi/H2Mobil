@@ -11,11 +11,14 @@ GPO LED (25,GPIO_value::LOW);
 control::Client control::client;
 control::Status control::status = control::Status::None;
 Timer control::timeout (10);
+Timer control::safety (1);
 
 void control::steer(const h2ep::Event& ev)
 {
-    if (status == Status::Cancel)
+    if (status != Status::Active)
         return;
+    safety.set();
+
     h2ep::Event res ("steer");
     try
     {
@@ -53,6 +56,7 @@ void control::steer(const h2ep::Event& ev)
 
 void control::halt()
 {
+    safety.disable();
     for (auto& it: PINS)
     {
         try {
@@ -102,6 +106,10 @@ void control::read()
     else if (ev.name == "noop")
     {
         client.send(h2ep::Event("noop"));
+    }
+    else if (ev.name == "ping")
+    {
+        safety.set();
     }
 }
 
@@ -166,6 +174,8 @@ void control::tick()
 
     case Status::Active:
         read();
+        if (safety.due())
+            halt();
         break;
 
     case Status::Cancel:

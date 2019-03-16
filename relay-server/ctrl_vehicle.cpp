@@ -2,7 +2,20 @@
 #include "tobilib/stringplus/stringplus.h"
 #include <iostream>
 
+Timer control::vehicle::pinger (0.5);
 bool control::vehicle::video::enabled = false;
+
+void control::vehicle::tick()
+{
+    if (pinger.due())
+    {
+        Client vhcl = seat::get();
+        if (vhcl==NULL)
+            return;
+        pinger.set();
+        vhcl->endpoint->send(h2ep::Event("ping"));
+    }
+}
 
 void control::vehicle::video::set(bool en)
 {
@@ -40,6 +53,7 @@ void control::vehicle::seat::set(Client c)
     c->data.vehicle=true;
     core::statusinfo::send=true;
     mutual::set_vehicle(c->data.id);
+    pinger.set();
 }
 
 void control::vehicle::seat::remove()

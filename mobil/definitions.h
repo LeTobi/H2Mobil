@@ -37,6 +37,7 @@ namespace control
     extern Client client;
     extern Status status;
     extern Timer timeout;
+    extern Timer safety;
     
     void steer(const h2ep::Event& ev);
     void halt();

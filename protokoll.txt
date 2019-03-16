@@ -65,6 +65,8 @@ Verbindung mit Relay-Server:
 	<- "steer" {result:"ok"|"error", msg:[nachricht]}
 	
 	-> "video" {state:"true"|"false"}
+
+	-> "ping" {}
 	
 	Kamera (rohe Websocket verbindung):
 	
