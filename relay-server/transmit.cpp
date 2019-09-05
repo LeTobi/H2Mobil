@@ -42,6 +42,7 @@ void transmit::identify(Client c)
         if (c->endpoint->read_size()>=10)
         {
             c->data.id = c->endpoint->read().substr(0,10);
+            c->endpoint->write_setmode(WS_Endpoint::WriteMode::Binary);
         }
     }
     else if (c->data.viewer)

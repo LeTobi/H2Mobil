@@ -3,7 +3,6 @@
 
 video::Status video::status = video::Status::Closed;
 Capture video::camera;
-jpeg_encoder video::encoder;
 stream::WS_Client video::client;
 
 void video::tick()
@@ -19,6 +18,7 @@ void video::tick()
     case Status::Connecting:
         if (client.status() == Client::Status::Active)
         {
+            client.write_setmode(WS_Endpoint::WriteMode::Binary);
             client.write(mutual::id_get());
             status = Status::Enabled;
         }
@@ -100,7 +100,7 @@ void video::snapshot()
     try
     {
         camera.read();
-        client.write(base64::encode(camera.data().toString()).toString());
+        client.write(camera.data().toString());
     }
     catch (Exception& err)
     {

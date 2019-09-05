@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "c:/Tobias/Dokumente/vscode/",
-                "C:/Tobias/Libraries/boost_1_67_0"
+                "C:/Tobias/Libraries/boost_1_67_0",
+                "/home/tobias/VisualStudio"
             ],
             "defines": [
                 "_DEBUG",
